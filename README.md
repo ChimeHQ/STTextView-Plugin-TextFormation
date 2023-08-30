@@ -1,2 +1,2 @@
-# https-github.com-krzyzanowskim-STTextView-Plugin-TextFormation
+# STTextView-Plugin-TextFormation
 Source Code Typing Completions
