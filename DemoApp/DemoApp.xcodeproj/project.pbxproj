@@ -12,7 +12,7 @@
 		758BAB532A9BDFC200D840BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758BAB522A9BDFC200D840BF /* AppDelegate.swift */; };
 		758BAB552A9BDFC300D840BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 758BAB542A9BDFC300D840BF /* Assets.xcassets */; };
 		758BAB582A9BDFC300D840BF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 758BAB562A9BDFC300D840BF /* MainMenu.xib */; };
-		C9AF0BF52AA0DEAC001863F8 /* TextFormationSTTextViewPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = C9AF0BF42AA0DEAC001863F8 /* TextFormationSTTextViewPlugin */; };
+		C9E91B8B2AA127C9000FC308 /* TextFormationPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = C9E91B8A2AA127C9000FC308 /* TextFormationPlugin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +30,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9E91B8B2AA127C9000FC308 /* TextFormationPlugin in Frameworks */,
 				7565EBC12A9BE0B10005B170 /* STTextView in Frameworks */,
-				C9AF0BF52AA0DEAC001863F8 /* TextFormationSTTextViewPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,12 +81,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				C9AF0BF32AA0DEA8001863F8 /* PBXTargetDependency */,
+				C9E91B892AA127C4000FC308 /* PBXTargetDependency */,
 			);
 			name = DemoApp;
 			packageProductDependencies = (
 				7565EBC02A9BE0B10005B170 /* STTextView */,
-				C9AF0BF42AA0DEAC001863F8 /* TextFormationSTTextViewPlugin */,
+				C9E91B8A2AA127C9000FC308 /* TextFormationPlugin */,
 			);
 			productName = DemoApp;
 			productReference = 758BAB4F2A9BDFC200D840BF /* DemoApp.app */;
@@ -153,9 +153,9 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C9AF0BF32AA0DEA8001863F8 /* PBXTargetDependency */ = {
+		C9E91B892AA127C4000FC308 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = C9AF0BF22AA0DEA8001863F8 /* TextFormationSTTextViewPlugin */;
+			productRef = C9E91B882AA127C4000FC308 /* TextFormationPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -380,13 +380,13 @@
 			package = 7565EBBF2A9BE0B10005B170 /* XCRemoteSwiftPackageReference "STTextView" */;
 			productName = STTextView;
 		};
-		C9AF0BF22AA0DEA8001863F8 /* TextFormationSTTextViewPlugin */ = {
+		C9E91B882AA127C4000FC308 /* TextFormationPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = TextFormationSTTextViewPlugin;
+			productName = TextFormationPlugin;
 		};
-		C9AF0BF42AA0DEAC001863F8 /* TextFormationSTTextViewPlugin */ = {
+		C9E91B8A2AA127C9000FC308 /* TextFormationPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = TextFormationSTTextViewPlugin;
+			productName = TextFormationPlugin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,7 +1,7 @@
 import XCTest
-@testable import STTextView_Plugin_TextFormation
+@testable import TextFormationPlugin
 
-final class TextFormationSTTextViewPluginTests: XCTestCase {
+final class TextFormationPluginTests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest

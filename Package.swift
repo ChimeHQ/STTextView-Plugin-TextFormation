@@ -7,10 +7,10 @@ let settings: [SwiftSetting] = [
 ]
 
 let package = Package(
-    name: "TextFormationSTTextViewPlugin",
+    name: "TextFormationPlugin",
     platforms: [.macOS(.v12)],
     products: [
-        .library(name: "TextFormationSTTextViewPlugin", targets: ["TextFormationSTTextViewPlugin"]),
+        .library(name: "TextFormationPlugin", targets: ["TextFormationPlugin"]),
     ],
     dependencies: [
 //        .package(url: "https://github.com/krzyzanowskim/STTextView", from: "0.8.10"),
@@ -21,7 +21,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "TextFormationSTTextViewPlugin",
+            name: "TextFormationPlugin",
             dependencies: [
                 .product(name: "STTextView", package: "STTextView"),
 				"TextStory",
@@ -29,8 +29,8 @@ let package = Package(
             ],
             swiftSettings: settings),
         .testTarget(
-            name: "TextFormationSTTextViewPluginTests",
-            dependencies: ["TextFormationSTTextViewPlugin"],
+            name: "TextFormationPluginTests",
+            dependencies: ["TextFormationPlugin"],
             swiftSettings: settings),
     ]
 )

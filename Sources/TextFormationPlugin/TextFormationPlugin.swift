@@ -7,6 +7,15 @@ import STTextView
 import TextFormation
 import TextStory
 
+// this was just lifted from TextFormation, but perhaps there's a better way to share all this
+extension NSResponder {
+	var undoActive: Bool {
+		guard let manager = undoManager else { return false }
+
+		return manager.isUndoing || manager.isRedoing
+	}
+}
+
 public struct TextFormationPlugin: STPlugin {
 	private let filters: [Filter]
     private let whitespaceProviders: WhitespaceProviders
@@ -47,12 +56,18 @@ public struct TextFormationPlugin: STPlugin {
 		func shouldChangeText(in affectedRange: NSTextRange, replacementString: String?) -> Bool {
 			guard let string = replacementString else { return true }
 
+			if textView.undoActive {
+				return true
+			}
+
 			let contentManager = textView.textContentManager
 
 			let range = NSRange(affectedRange, in: contentManager)
 			let limit = NSRange(contentManager.documentRange, in: contentManager).upperBound
 
 			let mutation = TextMutation(string: string, range: range, limit: limit)
+
+			textView.undoManager?.beginUndoGrouping()
 
 			for filter in filters {
 				switch filter.processMutation(mutation, in: adapter, with: whitespaceProviders) {
@@ -64,6 +79,8 @@ public struct TextFormationPlugin: STPlugin {
                     return false
 				}
 			}
+
+			textView.undoManager?.endUndoGrouping()
 
             return true
 		}

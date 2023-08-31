@@ -2,7 +2,7 @@ import AppKit
 
 import STTextView
 import TextFormation
-import TextFormationSTTextViewPlugin
+import TextFormationPlugin
 
 final class EditorViewController: NSViewController {
 
