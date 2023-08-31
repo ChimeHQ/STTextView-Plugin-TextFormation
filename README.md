@@ -9,7 +9,7 @@ Add the plugin package as a dependency of your application, then register/add it
 
 ```swift
 import TextFormation
-import TextFormationSTTextViewPlugin
+import TextFormationPlugin
 
 let filters = [
     StandardOpenPairFilter(open: "[", close: "]")
