@@ -19,6 +19,24 @@
       }
     },
     {
+      "identity" : "sttextview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/STTextView",
+      "state" : {
+        "revision" : "f462e18a20ebeb24e4653690335b0c4b29159491",
+        "version" : "0.8.12"
+      }
+    },
+    {
+      "identity" : "textformation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ChimeHQ/TextFormation",
+      "state" : {
+        "revision" : "b4987856bc860643ac2c9cdbc7d5f3e9ade68377",
+        "version" : "0.8.1"
+      }
+    },
+    {
       "identity" : "textstory",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/TextStory",

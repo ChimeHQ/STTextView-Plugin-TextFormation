@@ -13,10 +13,8 @@ let package = Package(
         .library(name: "TextFormationPlugin", targets: ["TextFormationPlugin"]),
     ],
     dependencies: [
-//        .package(url: "https://github.com/krzyzanowskim/STTextView", from: "0.8.10"),
-        .package(path: "/Users/matt/Developer/STTextView"),
-//        .package(url: "https://github.com/ChimeHQ/TextFormation", from: "0.8.0"),
-		.package(path: "/Users/matt/Chime/Code/TextFormation"),
+        .package(url: "https://github.com/krzyzanowskim/STTextView", from: "0.8.10"),
+        .package(url: "https://github.com/ChimeHQ/TextFormation", from: "0.8.1"),
 		.package(url: "https://github.com/ChimeHQ/TextStory", from: "0.8.0"),
     ],
     targets: [

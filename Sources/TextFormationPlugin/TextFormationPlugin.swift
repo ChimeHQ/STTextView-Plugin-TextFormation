@@ -32,11 +32,7 @@ public struct TextFormationPlugin: STPlugin {
 	}
 
 	public func makeCoordinator(context: CoordinatorContext) -> Coordinator {
-        guard #available(macOS 14.0, *) else { fatalError() }
-
-        return MainActor.assumeIsolated {
-            Coordinator(view: context.textView, filters: filters, whitespaceProviders: whitespaceProviders)
-        }
+        Coordinator(view: context.textView, filters: filters, whitespaceProviders: whitespaceProviders)
 	}
 
 	@MainActor
