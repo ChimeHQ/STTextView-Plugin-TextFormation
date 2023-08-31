@@ -1,7 +1,7 @@
 [STTextView](https://github.com/krzyzanowskim/STTextView) typing completions with [TextFormation](https://github.com/ChimeHQ/TextFormation).
 
-⚠️ There are currently some Swift concurrency-related incompatiblities that prevent this from building
-⚠️ There is a bug related to undo. I haven't tracked this down yet.
+- ⚠️ There are currently some Swift concurrency-related incompatiblities that prevent this from building.
+- ⚠️ There is a bug related to undo. I haven't tracked this down yet.
 
 ## Installation
 
