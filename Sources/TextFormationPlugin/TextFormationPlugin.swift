@@ -25,12 +25,14 @@ public struct TextFormationPlugin: STPlugin {
         self.whitespaceProviders = whitespaceProviders
 	}
 
+	@MainActor
 	public func setUp(context: Context) {
 		context.events.shouldChangeText { affectedRange, replacementString in
 			context.coordinator.shouldChangeText(in: affectedRange, replacementString: replacementString)
 		}
 	}
 
+	@MainActor
 	public func makeCoordinator(context: CoordinatorContext) -> Coordinator {
         Coordinator(view: context.textView, filters: filters, whitespaceProviders: whitespaceProviders)
 	}
