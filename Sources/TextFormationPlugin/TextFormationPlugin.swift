@@ -26,7 +26,7 @@ public struct TextFormationPlugin: STPlugin {
 	}
 
 	@MainActor
-	public func setUp(context: Context) {
+	public func setUp(context: any Context) {
 		context.events.shouldChangeText { affectedRange, replacementString in
 			context.coordinator.shouldChangeText(in: affectedRange, replacementString: replacementString)
 		}
