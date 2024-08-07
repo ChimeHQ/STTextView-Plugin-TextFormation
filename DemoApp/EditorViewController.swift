@@ -21,12 +21,16 @@ final class EditorViewController: NSViewController {
 		super.viewDidLoad()
 		view.frame.size = CGSize(width: 500, height: 500)
 
-		let filters = [
-			StandardOpenPairFilter(open: "[", close: "]")
+        let filters: [Filter] = [
+            StandardOpenPairFilter(open: "{", close: "}"),
+			StandardOpenPairFilter(open: "[", close: "]"),
+            StandardOpenPairFilter(open: "(", close: ")"),
 		]
 
+        let indenter = TextualIndenter(patterns: TextualIndenter.basicPatterns)
+
 		let providers = WhitespaceProviders(
-			leadingWhitespace: WhitespaceProviders.passthroughProvider,
+            leadingWhitespace: indenter.substitionProvider(indentationUnit: "    ", width: 4),
 			trailingWhitespace: WhitespaceProviders.removeAllProvider
 		)
 
