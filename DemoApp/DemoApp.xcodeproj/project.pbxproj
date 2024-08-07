@@ -50,7 +50,10 @@
 				758BAB502A9BDFC200D840BF /* Products */,
 				75E2FDF02A9BE2260055DF08 /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 1;
 		};
 		758BAB502A9BDFC200D840BF /* Products */ = {
 			isa = PBXGroup;

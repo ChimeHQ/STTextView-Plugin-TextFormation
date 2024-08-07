@@ -21,16 +21,16 @@ final class EditorViewController: NSViewController {
 		super.viewDidLoad()
 		view.frame.size = CGSize(width: 500, height: 500)
 
-        let filters: [Filter] = [
-            StandardOpenPairFilter(open: "{", close: "}"),
+		let filters: [Filter] = [
+			StandardOpenPairFilter(open: "{", close: "}"),
 			StandardOpenPairFilter(open: "[", close: "]"),
-            StandardOpenPairFilter(open: "(", close: ")"),
+			StandardOpenPairFilter(open: "(", close: ")"),
 		]
 
-        let indenter = TextualIndenter(patterns: TextualIndenter.basicPatterns)
+		let indenter = TextualIndenter(patterns: TextualIndenter.basicPatterns)
 
 		let providers = WhitespaceProviders(
-            leadingWhitespace: indenter.substitionProvider(indentationUnit: "    ", width: 4),
+			leadingWhitespace: indenter.substitionProvider(indentationUnit: "    ", width: 4),
 			trailingWhitespace: WhitespaceProviders.removeAllProvider
 		)
 
@@ -42,12 +42,12 @@ final class EditorViewController: NSViewController {
 		textView.font = .monospacedSystemFont(ofSize: 0, weight: .regular)
 
 		textView.string = """
-		import Foundation
+	import Foundation
 
-		func hello() {
-			print("Hello World!")
-		}
-		"""
+	func hello() {
+	 print("Hello World!")
+	}
+	"""
 	}
 }
 
