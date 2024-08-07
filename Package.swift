@@ -13,9 +13,9 @@ let package = Package(
         .library(name: "TextFormationPlugin", targets: ["TextFormationPlugin"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/krzyzanowskim/STTextView", from: "0.8.13"),
-        .package(url: "https://github.com/ChimeHQ/TextFormation", from: "0.8.1"),
-		.package(url: "https://github.com/ChimeHQ/TextStory", from: "0.8.0"),
+        .package(url: "https://github.com/krzyzanowskim/STTextView", from: "0.9.6"),
+        .package(url: "https://github.com/ChimeHQ/TextFormation", from: "0.9.0"),
+		.package(url: "https://github.com/ChimeHQ/TextStory", from: "0.9.0"),
     ],
     targets: [
         .target(
