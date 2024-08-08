@@ -5,49 +5,68 @@ import STTextView
 import TextStory
 import TextFormation
 
-extension STTextView {
-	fileprivate var contentStorage: NSTextContentStorage? {
-		textContentManager as? NSTextContentStorage
+private final class TextStoringAdapter: TextStoring {
+	weak var textView: STTextView?
+
+	var length: Int {
+		MainActor.assumeIsolated {
+			// this works around a duplicate public 'length' method defined on NSTextContentStorage in STTextView
+			(textView?.contentStorage as TextStoring?)?.length ?? 0
+		}
 	}
 
-	func applyMutation(_ mutation: TextMutation) {
-		guard let contentStorage = contentStorage else { return }
+	init(textView: STTextView) {
+		self.textView = textView
+	}
 
-		if let manager = undoManager {
-			let inverse = contentStorage.inverseMutation(for: mutation)
-
-			manager.registerUndo(withTarget: self, handler: {
-				$0.applyMutation(inverse)
-			})
+	func substring(from range: NSRange) -> String? {
+		MainActor.assumeIsolated {
+			textView?.contentStorage?.substring(from: range)
 		}
+	}
 
-		contentStorage.applyMutation(mutation)
+	func applyMutation(_ mutation: TextStory.TextMutation) {
+		MainActor.assumeIsolated {
+			guard let textView, let contentStorage = textView.contentStorage else {
+				return
+			}
 
-		didChangeText()
+			if let manager = textView.undoManager {
+				let inverse = contentStorage.inverseMutation(for: mutation)
+
+				manager.registerUndo(withTarget: self, handler: { adapter in
+					contentStorage.performEditingTransaction {
+						adapter.applyMutation(inverse)
+					}
+				})
+			}
+
+			textView.textWillChange(nil)
+
+			contentStorage.performEditingTransaction {
+				contentStorage.applyMutation(mutation)
+			}
+
+			textView.didChangeText()
+		}
 	}
 }
 
-extension TextStorageAdapter {
-	@MainActor
-	public convenience init(textView: STTextView) {
-		self.init {
-			// this works around a duplicate public 'length' method defined on NSTextContentStorage in STTextView
-			(textView.contentStorage as TextStoring?)?.length ?? 0
-		} substringProvider: { range in
-			textView.contentStorage?.substring(from: range)
-		} mutationApplier: { mutation in
-			textView.applyMutation(mutation)
-		}
+private extension STTextView {
+	var contentStorage: NSTextContentStorage? {
+		textContentManager as? NSTextContentStorage
 	}
 }
 
 extension TextInterfaceAdapter {
+
 	@MainActor
 	public convenience init(textView: STTextView) {
 		self.init(
 			getSelection: { textView.selectedRange() },
 			setSelection: { textView.setSelectedRange($0) },
-			storage: TextStorageAdapter(textView: textView)
+			storage: TextStoringAdapter(textView: textView)
 		)
 	}
 }
+

@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "mainoffender",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mattmassicotte/MainOffender",
-      "state" : {
-        "revision" : "343cc3797618c29b48b037b4e2beea0664e75315",
-        "version" : "0.1.0"
-      }
-    },
-    {
       "identity" : "rearrange",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/Rearrange",
@@ -19,12 +10,21 @@
       }
     },
     {
+      "identity" : "sttextkitplus",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/STTextKitPlus",
+      "state" : {
+        "revision" : "87d700502fe9b64a7b29a553505ce94adc2be7da",
+        "version" : "0.1.4"
+      }
+    },
+    {
       "identity" : "sttextview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/krzyzanowskim/STTextView",
       "state" : {
-        "revision" : "177460e2d7cdcc62d021d0a2eb5a99a1ae36367c",
-        "version" : "0.8.13"
+        "revision" : "8c4b880259f122c5ff4283adc698ac0d5d4b9027",
+        "version" : "0.9.6"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/TextFormation",
       "state" : {
-        "revision" : "b4987856bc860643ac2c9cdbc7d5f3e9ade68377",
-        "version" : "0.8.1"
+        "revision" : "b1ce9a14bd86042bba4de62236028dc4ce9db6a1",
+        "version" : "0.9.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/TextStory",
       "state" : {
-        "revision" : "8883fa739aa213e70e6cb109bfbf0a0b551e4cb5",
-        "version" : "0.8.0"
+        "revision" : "8dc9148b46fcf93b08ea9d4ef9bdb5e4f700e008",
+        "version" : "0.9.0"
       }
     }
   ],
