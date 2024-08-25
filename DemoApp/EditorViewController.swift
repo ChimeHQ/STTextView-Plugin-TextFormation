@@ -22,10 +22,18 @@ final class EditorViewController: NSViewController {
 		view.frame.size = CGSize(width: 500, height: 500)
 
 		let filters: [Filter] = [
-			StandardOpenPairFilter(open: "{", close: "}"),
-			StandardOpenPairFilter(open: "[", close: "]"),
-			StandardOpenPairFilter(open: "(", close: ")"),
-		]
+            StandardOpenPairFilter(open: "{", close: "}"),
+            StandardOpenPairFilter(open: "(", close: ")"),
+            StandardOpenPairFilter(open: "[", close: "]"),
+            StandardOpenPairFilter(open: "<", close: ">"),
+            StandardOpenPairFilter(open: "\"", close: "\""),
+            StandardOpenPairFilter(open: "`", close: "`"),
+            NewlineProcessingFilter(),
+            DeleteCloseFilter(open: "{", close: "}"),
+            DeleteCloseFilter(open: "(", close: ")"),
+            DeleteCloseFilter(open: "[", close: "]"),
+            DeleteCloseFilter(open: "<", close: ">")
+        ]
 
 		let indenter = TextualIndenter(patterns: TextualIndenter.basicPatterns)
 

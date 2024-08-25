@@ -63,8 +63,8 @@ extension TextInterfaceAdapter {
 	@MainActor
 	public convenience init(textView: STTextView) {
 		self.init(
-			getSelection: { textView.selectedRange() },
-			setSelection: { textView.setSelectedRange($0) },
+            getSelection: { textView.textSelection },
+            setSelection: { textView.textSelection = $0 },
 			storage: TextStoringAdapter(textView: textView)
 		)
 	}
