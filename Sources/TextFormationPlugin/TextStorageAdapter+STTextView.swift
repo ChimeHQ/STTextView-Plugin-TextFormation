@@ -5,14 +5,13 @@ import STTextView
 import TextStory
 import TextFormation
 
-private final class TextStoringAdapter: TextStoring {
+@MainActor
+private final class TextStoringAdapter: @preconcurrency TextStoring {
 	weak var textView: STTextView?
 
 	var length: Int {
-		MainActor.assumeIsolated {
-			// this works around a duplicate public 'length' method defined on NSTextContentStorage in STTextView
-			(textView?.contentStorage as TextStoring?)?.length ?? 0
-		}
+		// this works around a duplicate public 'length' method defined on NSTextContentStorage in STTextView
+		(textView?.contentStorage as TextStoring?)?.length ?? 0
 	}
 
 	init(textView: STTextView) {
@@ -20,35 +19,34 @@ private final class TextStoringAdapter: TextStoring {
 	}
 
 	func substring(from range: NSRange) -> String? {
-		MainActor.assumeIsolated {
-			textView?.contentStorage?.substring(from: range)
-		}
+		textView?.contentStorage?.substring(from: range)
 	}
 
 	func applyMutation(_ mutation: TextStory.TextMutation) {
-		MainActor.assumeIsolated {
-			guard let textView, let contentStorage = textView.contentStorage else {
-				return
-			}
+		guard let textView, let contentStorage = textView.contentStorage else {
+			return
+		}
 
-			if let manager = textView.undoManager {
-				let inverse = contentStorage.inverseMutation(for: mutation)
+		if let manager = textView.undoManager {
+			let inverse = contentStorage.inverseMutation(for: mutation)
 
-				manager.registerUndo(withTarget: self, handler: { adapter in
+			manager.registerUndo(withTarget: self, handler: { adapter in
+				MainActor.assumeIsolated {
+					guard let contentStorage = textView.contentStorage else { return }
 					contentStorage.performEditingTransaction {
 						adapter.applyMutation(inverse)
 					}
-				})
-			}
-
-			textView.textWillChange(nil)
-
-			contentStorage.performEditingTransaction {
-				contentStorage.applyMutation(mutation)
-			}
-
-			textView.didChangeText()
+				}
+			})
 		}
+
+		textView.textWillChange(nil)
+
+		contentStorage.performEditingTransaction {
+			contentStorage.applyMutation(mutation)
+		}
+
+		textView.didChangeText()
 	}
 }
 
