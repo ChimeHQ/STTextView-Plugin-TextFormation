@@ -36,7 +36,14 @@ private final class TextStoringAdapter: @preconcurrency TextStoring {
 			})
 		}
 
-		textView.replaceCharacters(in: mutation.range, with: mutation.string)
+		textView.textWillChange(self)
+		contentStorage.performEditingTransaction {
+			let changeTextRange = NSTextRange(mutation.range, in: contentStorage)!
+			textView.textDelegate?.textView(textView, willChangeTextIn: changeTextRange, replacementString: mutation.string)
+			contentStorage.applyMutation(mutation)
+			textView.textDelegate?.textView(textView, didChangeTextIn: changeTextRange, replacementString: mutation.string)
+		}
+		textView.didChangeText()
 	}
 }
 
