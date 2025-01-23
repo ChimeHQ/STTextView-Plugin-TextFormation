@@ -1,0 +1,10 @@
+--binarygrouping none
+--decimalgrouping none
+--hexgrouping none
+--indent tab
+--octalgrouping none
+--self init-only
+--semicolons never
+--stripunusedargs closure-only
+--wraparguments before-first
+--wrapcollections before-first

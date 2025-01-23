@@ -18,11 +18,11 @@ extension NSResponder {
 
 public struct TextFormationPlugin: STPlugin {
 	private let filters: [Filter]
-    private let whitespaceProviders: WhitespaceProviders
+	private let whitespaceProviders: WhitespaceProviders
 
 	public init(filters: [Filter], whitespaceProviders: WhitespaceProviders) {
 		self.filters = filters
-        self.whitespaceProviders = whitespaceProviders
+		self.whitespaceProviders = whitespaceProviders
 	}
 
 	@MainActor
@@ -34,20 +34,20 @@ public struct TextFormationPlugin: STPlugin {
 
 	@MainActor
 	public func makeCoordinator(context: CoordinatorContext) -> Coordinator {
-        Coordinator(view: context.textView, filters: filters, whitespaceProviders: whitespaceProviders)
+		Coordinator(view: context.textView, filters: filters, whitespaceProviders: whitespaceProviders)
 	}
 
 	@MainActor
 	public class Coordinator {
 		private let adapter: TextInterfaceAdapter
-        private let textView: STTextView
+		private let textView: STTextView
 		let filters: [Filter]
 		let whitespaceProviders: WhitespaceProviders
 
 		init(view: STTextView, filters: [Filter], whitespaceProviders: WhitespaceProviders) {
-            self.textView = view
-            self.filters = filters
-            self.whitespaceProviders = whitespaceProviders
+			self.textView = view
+			self.filters = filters
+			self.whitespaceProviders = whitespaceProviders
 			self.adapter = TextInterfaceAdapter(textView: view)
 		}
 
@@ -72,16 +72,16 @@ public struct TextFormationPlugin: STPlugin {
 
 			for filter in filters {
 				switch filter.processMutation(mutation, in: adapter, with: whitespaceProviders) {
-                case .none:
-                    break
-                case .stop:
-                    return true
-                case .discard:
-                    return false
+				case .none:
+					break
+				case .stop:
+					return true
+				case .discard:
+					return false
 				}
 			}
 
-            return true
+			return true
 		}
 	}
 }

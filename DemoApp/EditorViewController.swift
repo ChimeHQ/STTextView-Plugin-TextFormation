@@ -5,13 +5,12 @@ import TextFormation
 import TextFormationPlugin
 
 final class EditorViewController: NSViewController {
-
 	private var textView: STTextView!
 
 	override func loadView() {
 		let scrollView = STTextView.scrollableTextView()
-		self.textView = scrollView.documentView as? STTextView
-		self.view = scrollView
+		textView = scrollView.documentView as? STTextView
+		view = scrollView
 
 		// a delegate must be set for plug ins to work
 		textView.delegate = self
@@ -22,18 +21,18 @@ final class EditorViewController: NSViewController {
 		view.frame.size = CGSize(width: 500, height: 500)
 
 		let filters: [Filter] = [
-            StandardOpenPairFilter(open: "{", close: "}"),
-            StandardOpenPairFilter(open: "(", close: ")"),
-            StandardOpenPairFilter(open: "[", close: "]"),
-            StandardOpenPairFilter(open: "<", close: ">"),
-            StandardOpenPairFilter(open: "\"", close: "\""),
-            StandardOpenPairFilter(open: "`", close: "`"),
-            NewlineProcessingFilter(),
-            DeleteCloseFilter(open: "{", close: "}"),
-            DeleteCloseFilter(open: "(", close: ")"),
-            DeleteCloseFilter(open: "[", close: "]"),
-            DeleteCloseFilter(open: "<", close: ">")
-        ]
+			StandardOpenPairFilter(open: "{", close: "}"),
+			StandardOpenPairFilter(open: "(", close: ")"),
+			StandardOpenPairFilter(open: "[", close: "]"),
+			StandardOpenPairFilter(open: "<", close: ">"),
+			StandardOpenPairFilter(open: "\"", close: "\""),
+			StandardOpenPairFilter(open: "`", close: "`"),
+			NewlineProcessingFilter(),
+			DeleteCloseFilter(open: "{", close: "}"),
+			DeleteCloseFilter(open: "(", close: ")"),
+			DeleteCloseFilter(open: "[", close: "]"),
+			DeleteCloseFilter(open: "<", close: ">"),
+		]
 
 		let indenter = TextualIndenter(patterns: TextualIndenter.basicPatterns)
 
@@ -50,15 +49,13 @@ final class EditorViewController: NSViewController {
 		textView.font = .monospacedSystemFont(ofSize: 0, weight: .regular)
 
 		textView.string = """
-	import Foundation
+		import Foundation
 
-	func hello() {
-	 print("Hello World!")
-	}
-	"""
+		func hello() {
+		 print("Hello World!")
+		}
+		"""
 	}
 }
 
-extension EditorViewController: STTextViewDelegate {
-
-}
+extension EditorViewController: STTextViewDelegate {}

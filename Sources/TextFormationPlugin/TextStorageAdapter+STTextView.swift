@@ -2,16 +2,15 @@ import AppKit
 import Foundation
 
 import STTextView
-import TextStory
 import TextFormation
+import TextStory
 
 @MainActor
 private final class TextStoringAdapter: @preconcurrency TextStoring {
 	weak var textView: STTextView?
 
 	var length: Int {
-		// this works around a duplicate public 'length' method defined on NSTextContentStorage in STTextView
-		(textView?.contentStorage as TextStoring?)?.length ?? 0
+		(textView?.contentStorage as? NSTextContentManager)?.length ?? 0
 	}
 
 	init(textView: STTextView) {
@@ -30,23 +29,14 @@ private final class TextStoringAdapter: @preconcurrency TextStoring {
 		if let manager = textView.undoManager {
 			let inverse = contentStorage.inverseMutation(for: mutation)
 
-			manager.registerUndo(withTarget: self, handler: { adapter in
+			manager.registerUndo(withTarget: self, handler: { _ in
 				MainActor.assumeIsolated {
-					guard let contentStorage = textView.contentStorage else { return }
-					contentStorage.performEditingTransaction {
-						adapter.applyMutation(inverse)
-					}
+					textView.replaceCharacters(in: inverse.range, with: inverse.string)
 				}
 			})
 		}
 
-		textView.textWillChange(nil)
-
-		contentStorage.performEditingTransaction {
-			contentStorage.applyMutation(mutation)
-		}
-
-		textView.didChangeText()
+		textView.replaceCharacters(in: mutation.range, with: mutation.string)
 	}
 }
 
@@ -56,15 +46,13 @@ private extension STTextView {
 	}
 }
 
-extension TextInterfaceAdapter {
-
+public extension TextInterfaceAdapter {
 	@MainActor
-	public convenience init(textView: STTextView) {
+	convenience init(textView: STTextView) {
 		self.init(
-            getSelection: { textView.textSelection },
-            setSelection: { textView.textSelection = $0 },
+			getSelection: { textView.textSelection },
+			setSelection: { textView.textSelection = $0 },
 			storage: TextStoringAdapter(textView: textView)
 		)
 	}
 }
-
